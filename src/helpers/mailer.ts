@@ -3,6 +3,8 @@ import nodemailer from "nodemailer";
 export const sendEmail = async ({ email, emailType, userId }: any) => {
     try {
         // Todo: Implement the logic to send email
+        
+
         const transporter = nodemailer.createTransport({
             host: "smtp.ethereal.email",
             port: 587,
