@@ -8,8 +8,8 @@ connect();
 
 export async function POST(request: NextRequest) {
     try {
-        const reqBody = request.json();
-        const { username, email, password} = reqBody;
+        const reqBody = await request.json();
+        const {email, username, password} = reqBody;
         console.log(reqBody);
 
         const user = await User.findOne({ $or: [{ email }, { username }] });
