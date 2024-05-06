@@ -1,1 +1,0 @@
-console.log("name:", process.env.ALI);
