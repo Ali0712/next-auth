@@ -10,7 +10,6 @@ export async function POST(request: NextRequest) {
     try {
         const reqBody = await request.json();
         const {email, username, password} = reqBody;
-        console.log(reqBody);
 
         const user = await User.findOne({ $or: [{ email }, { username }] });
         if (user) {
@@ -25,7 +24,6 @@ export async function POST(request: NextRequest) {
             password: hashedPassword
         })
         const savedUser = await newUser.save();
-        console.log(savedUser);
 
         // send verification email
         await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
