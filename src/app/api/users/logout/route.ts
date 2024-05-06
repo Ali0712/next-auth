@@ -1,9 +1,4 @@
-import { connect } from "@/dbConfig/dbConfig";
-import bcryptjs from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
-import User from "@/models/userModel";
-import { sendEmail } from "@/helpers/mailer";
-
 
 export async function GET(request: NextRequest) {
     try {
