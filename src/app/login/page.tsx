@@ -22,9 +22,9 @@ const LoginPage = () => {
             const response = await axios.post("/api/users/login", user);
             console.log("response", response);
             toast.success("Login successful");
-            // setTimeout(()=>{
-            //     router.push("/login");
-            // },1000)
+            setTimeout(()=>{
+                router.push("/profile");
+            },1000)
 
         } catch (error: any) {
             console.log("error", error);
