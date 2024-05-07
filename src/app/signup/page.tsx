@@ -14,17 +14,18 @@ const SignupPage = () => {
     const [loading, setLoading] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(true);
 
-    const signup = async () => {
+    const signup = async (e:any) => {
+        e.preventDefault()
         setButtonDisabled(true);
         try {
             setLoading(true);
             const response = await axios.post("/api/users/signup", user);
-            console.log("se", response);
+            console.log("response", response);
             toast.success("Signup successful");
             setTimeout(()=>{
                 router.push("/login");
-            
             },1000)
+
         } catch (error: any) {
             console.log("error", error);
             toast.error(error.response.data.message);
@@ -51,7 +52,7 @@ const SignupPage = () => {
             <Toaster position="top-right" reverseOrder={false} />
             <div className="max-w-md w-full px-6 py-8 bg-gray-800 shadow-md rounded-md">
                 <h2 className="text-2xl font-bold mb-6 text-white">Sign Up</h2>
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={signup}>
                     <div>
                         <label
                             htmlFor="username"
@@ -108,14 +109,14 @@ const SignupPage = () => {
                     </div>
                     <div>
                         <button
-                            type="button"
+                            type="submit"
                             className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
                                 buttonDisabled
                                     ? "opacity-50 cursor-not-allowed"
                                     : ""
                             }`}
                             disabled={buttonDisabled}
-                            onClick={signup}
+                            
                         >
                             {loading ? "Signing up..." : "Sign Up"}
                         </button>

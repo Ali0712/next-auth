@@ -15,14 +15,15 @@ export async function POST(request: NextRequest) {
         if (!user) {
             return NextResponse.json({message: "User does not exist"},{status: 400})
         }
-        if (!user.isVerified) {
-            return NextResponse.json({message: "Please verify your email"},{status: 400})
-        }
-
+        
         const validPassword = await bcryptjs.compare(password, user.password)
         if (!validPassword) {
             return NextResponse.json({message: "Invalid password"},{status: 400})
         }
+        if (!user.isVerified) {
+            return NextResponse.json({message: "Please verify your email"},{status: 400})
+        }
+
 
         const tokenPayload = {id: user._id, email: user.email};
         const token = jwt.sign(tokenPayload, process.env.TOKEN_SECRET!, {expiresIn: "1d"});
